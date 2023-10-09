@@ -1,6 +1,11 @@
-# ECommerce
+# Organic Shop
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.8.
+
+# Firebase Server
+
+This project is hosted in firebase server
+
 
 ## Development server
 

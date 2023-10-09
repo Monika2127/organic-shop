@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 
 import { AppComponent } from './app.component';
@@ -15,6 +18,7 @@ import { MyOrdersComponent } from './logged-in/my-orders/my-orders.component';
 import { AdProductsComponent } from './admin/ad-products/ad-products.component';
 import { AdOrdersComponent } from './admin/ad-orders/ad-orders.component';
 import { LoginComponent } from './logged-in/login/login.component';
+import { env } from 'src/environments/environments';
 
 
 
@@ -35,7 +39,10 @@ import { LoginComponent } from './logged-in/login/login.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    AngularFireModule.initializeApp(env.firebase),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]
