@@ -8,6 +8,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 
 import { AppComponent } from './app.component';
+import { LoginComponent } from './logged-in/login/login.component';
 import { HomeComponent } from './public/home/home.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { ProductsComponent } from './public/products/products.component';
@@ -17,14 +18,15 @@ import { ShoppingCartComponent } from './public/shopping-cart/shopping-cart.comp
 import { MyOrdersComponent } from './logged-in/my-orders/my-orders.component';
 import { AdProductsComponent } from './admin/ad-products/ad-products.component';
 import { AdOrdersComponent } from './admin/ad-orders/ad-orders.component';
-import { LoginComponent } from './logged-in/login/login.component';
 import { env } from 'src/environments/environments';
-
+import { AuthService } from './services/auth/auth.service';
+import { UserService } from './services/user-object/user.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     HomeComponent,
     ShoppingCartComponent,
     BsNavbarComponent,
@@ -34,17 +36,19 @@ import { env } from 'src/environments/environments';
     MyOrdersComponent,
     AdProductsComponent,
     AdOrdersComponent,
-    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    AngularFireModule.initializeApp(env.firebase),
+    AngularFireModule.initializeApp(env.firebase, 'organic-shop'),
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 

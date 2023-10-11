@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-danger">
     <div class="container-fluid">
-        <a class="navbar-brand" routerLink="/">OSha</a>
+        <a class="navbar-brand" routerLink="/home">OSha</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-expanded="false"
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,18 +11,48 @@
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['/shopping-cart']" routerLinkActive="active">Shopping Cart</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
-                </li>
-                <li ngbDropdown class="nav-item dropdown">
-                    <a ngbDropdownToggle class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Username</a>
+                
+                <!-- When we use firebase user -->
+                <!-- <li *ngIf="auth.user$ | async as user ; else noLogin" ngbDropdown class="nav-item dropdown">
+                    <a ngbDropdownToggle class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ user.displayName }}
+                    </a>
                     <ul ngbDropdownMenu class="dropdown-menu">
                         <li><a class="dropdown-item" [routerLink]="['/my/orders']">My Orders</a></li>
                         <li><a class="dropdown-item" [routerLink]="['/admin/orders']">Manage Orders</a></li>
                         <li><a class="dropdown-item" [routerLink]="['/admin/products']">Manage Products</a></li>
-                        <li><a class="dropdown-item">Log Out</a></li>
+                        <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
+                    </ul>
+                </li> -->
+
+                <!-- When we use user of the firebase database and use it as a AppUser,
+                    when using async, it kind of going to infinite loop which leds to crash coz it will use the change detection
+                    everytime and everytime, this html will re render and call the appUser$ and again it happens.
+                    
+                    so to tackle the above problem, we can use the subscription in component and use it as a object here
+                 -->
+                <!-- <li *ngIf="auth.appUser$ | async as user ; else noLogin" ngbDropdown class="nav-item dropdown"> -->
+                <li *ngIf="currUser ; else noLogin" ngbDropdown class="nav-item dropdown">
+                    <a ngbDropdownToggle class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ currUser.name }}
+                    </a>
+                    <ul ngbDropdownMenu class="dropdown-menu">
+                        <li><a class="dropdown-item" [routerLink]="['/my/orders']">My Orders</a></li>
+
+                        <ng-container *ngIf="currUser?.isAdmin">
+                            <li><a class="dropdown-item" [routerLink]="['/admin/orders']">Manage Orders</a></li>
+                            <li><a class="dropdown-item" [routerLink]="['/admin/products']">Manage Products</a></li>
+                        </ng-container>
+                        
+                        <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
                     </ul>
                 </li>
+
+                <ng-template #noLogin>
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
+                    </li>
+                </ng-template>
             </ul>
             
         </div>

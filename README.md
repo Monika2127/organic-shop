@@ -4,8 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 # Firebase Server
 
-This project is hosted in firebase server
-
+This project is hosted in firebase server, https://organic-shop-3d10a.web.app/
 
 ## Development server
 
