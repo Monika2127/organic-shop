@@ -21,6 +21,10 @@ import { AdOrdersComponent } from './admin/ad-orders/ad-orders.component';
 import { env } from 'src/environments/environments';
 import { AuthService } from './services/auth/auth.service';
 import { UserService } from './services/user-object/user.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './services/categories/category.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductService } from './services/product/product.service';
 
 
 @NgModule({
@@ -36,18 +40,23 @@ import { UserService } from './services/user-object/user.service';
     MyOrdersComponent,
     AdProductsComponent,
     AdOrdersComponent,
+    ProductFormComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(env.firebase, 'organic-shop'),
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
   providers: [
     AuthService,
-    UserService
+    UserService,
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
