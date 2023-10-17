@@ -5,6 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { DataTablesModule } from 'angular-datatables';
 
 
 import { AppComponent } from './app.component';
@@ -48,6 +49,7 @@ import { ProductService } from './services/product/product.service';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    DataTablesModule,
     AngularFireModule.initializeApp(env.firebase, 'organic-shop'),
     AngularFireAuthModule,
     AngularFireDatabaseModule

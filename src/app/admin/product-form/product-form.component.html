@@ -30,7 +30,7 @@
                 <select id="category" class="form-control" [(ngModel)]="product['category']" name="category" required
                     #category="ngModel">
                     <option disabled>Select Category</option>
-                    <option *ngFor="let cat of categories$ | async" [value]="cat.id"> {{ cat.name }} </option>
+                    <option *ngFor="let cat of categories$ | async" [value]="cat.key"> {{ cat.name }} </option>
                 </select>
 
                 <div class="alert alert-danger" *ngIf="category.touched && category.invalid">
@@ -40,12 +40,12 @@
 
             <div class="form-group">
                 <label for="imageUrl">Image Url</label>
-                <input id="imageUrl" type="text" class="form-control" [(ngModel)]="product['imgUrl']" name="imgUrl"
-                    required #imgUrl="ngModel" pattern="https?://.+" autocomplete="off">
+                <input id="imageUrl" type="text" class="form-control" [(ngModel)]="product['imageUrl']" name="imageUrl"
+                    required #imageUrl="ngModel" pattern="https?://.+" autocomplete="off">
 
-                <div class="alert alert-danger" *ngIf="imgUrl.touched && imgUrl.invalid">
-                    <div *ngIf="imgUrl?.errors?.['required']">Image Url is required</div>
-                    <div *ngIf="imgUrl?.errors?.['pattern']">Please enter a valid URL</div>
+                <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
+                    <div *ngIf="imageUrl?.errors?.['required']">Image Url is required</div>
+                    <div *ngIf="imageUrl?.errors?.['pattern']">Please enter a valid URL</div>
                 </div>
             </div>
 
@@ -58,8 +58,8 @@
     </div>
 
     <div class="col-sm-6">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" [src]="product.imgUrl">
+        <div *ngIf="product.title" class="card" style="width: 18rem;">
+            <img class="card-img-top" [src]="product.imageUrl">
             <div class="card-body">
                 <h5 class="card-title">{{ title.value }}</h5>
                 <p class="card-text">{{ price.value | currency:'USD':'symbol' }}</p>

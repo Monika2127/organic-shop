@@ -17,13 +17,18 @@ export class AppComponent {
     private userSer: UserService
   ) {
     auth.user$.subscribe(user => {
-      if(user) {
+      if (!user) return;
 
-        userSer.save(user);
+      userSer.save(user);
 
-        let returnUrl = localStorage.getItem('returnUrl') || '/';
-        this.router.navigateByUrl(returnUrl);
-      }
+      let returnUrl = localStorage.getItem('returnUrl');
+      //  here, when user login through url, it will get the return Url and navigate to that page but only one time, after that
+      //  it should be removed from LS
+
+      if(!returnUrl) return;
+
+      localStorage.removeItem('returnUrl');
+      this.router.navigateByUrl(returnUrl);
     })
   }
 }

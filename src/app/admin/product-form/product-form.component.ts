@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs';
 import { CategoryService } from 'src/app/services/categories/category.service';
 import { ProductService } from 'src/app/services/product/product.service';
 
@@ -29,7 +30,11 @@ export class ProductFormComponent {
       this.productSer.getIdProduct(this.productId).subscribe(prod => this.product = prod);
     }
 
-    this.categories$ = categorySer.getCategories().valueChanges();
+    this.categories$ = categorySer.getCategories().snapshotChanges().pipe(
+      map(change => {
+        return change.map((c) => ({ key: c.payload.key, ...(c.payload.val() as object) }))
+      })
+    );
 
 
 
