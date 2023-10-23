@@ -26,6 +26,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { CategoryService } from './services/categories/category.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductService } from './services/product/product.service';
+import { ProductFilterComponent } from './public/products/product-filter/product-filter.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { ProductService } from './services/product/product.service';
     AdProductsComponent,
     AdOrdersComponent,
     ProductFormComponent,
+    ProductFilterComponent,
   ],
   imports: [
     BrowserModule,

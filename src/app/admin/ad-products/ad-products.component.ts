@@ -10,7 +10,6 @@ import { ProductService } from 'src/app/services/product/product.service';
 })
 export class AdProductsComponent implements OnDestroy {
 
-  products$: any;
   products: Product[] = [];
   filteredProducts: any[] = [];
   prodSubscription!: Subscription;
@@ -26,13 +25,8 @@ export class AdProductsComponent implements OnDestroy {
   }
 
   loadProducts() {
-    this.products$ = this.prodSer.getProducts().snapshotChanges().pipe(
-      map(change => {
-        return change.map((c) => ({ key: c.payload.key, ...(c.payload.val() as object) }))
-      })
-    );
 
-    this.prodSubscription = this.products$.subscribe((item: any) => {
+    this.prodSubscription = this.prodSer.getProductsWithKeys().subscribe((item: any) => {
       this.filteredProducts = this.products = item;
     })
 
@@ -68,7 +62,6 @@ export class AdProductsComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.prodSubscription.unsubscribe();
   }
-
 
 
 }
