@@ -30,11 +30,14 @@ export class ProductFormComponent {
       this.productSer.getIdProduct(this.productId).subscribe(prod => this.product = prod);
     }
 
-    this.categories$ = categorySer.getCategories().snapshotChanges().pipe(
-      map(change => {
-        return change.map((c) => ({ key: c.payload.key, ...(c.payload.val() as object) }))
-      })
-    );
+    // this.categories$ = categorySer.getCategories().snapshotChanges().pipe(
+    //   map(change => {
+    //     return change.map((c) => ({ key: c.payload.key, ...(c.payload.val() as object) }))
+    //   })
+    // );
+
+
+    this.categories$ = categorySer.getCategoriesWithKeys();
 
 
 
