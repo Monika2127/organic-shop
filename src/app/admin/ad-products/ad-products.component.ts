@@ -64,5 +64,4 @@ export class AdProductsComponent implements OnDestroy {
   }
 
 
-
 }

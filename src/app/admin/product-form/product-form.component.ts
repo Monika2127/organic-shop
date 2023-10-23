@@ -39,8 +39,6 @@ export class ProductFormComponent {
 
     this.categories$ = categorySer.getCategoriesWithKeys();
 
-
-
     //  FOR REACTIVE FORMS
 
     //  make the validator async, otherwise working with some error in array
